@@ -8,29 +8,6 @@ const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 const PORT = process.env.PORT || 3001;
-// auth
-app.get("/v1/auth/context", (req, res) => {
-    const response = {
-        user: {
-            userId: "u-1",
-            auth0Id: "a-1",
-            firstName: "John",
-            lastName: "Doe",
-            email: "john.doe@aerospike.com",
-            picture: "https://picsum.photos/id/237/300/300",
-        },
-        memberships: [
-            {
-                organization: {
-                    id: "o-1",
-                    name: "John-Organization",
-                },
-                role: "Owner",
-            },
-        ],
-    };
-    res.json(response);
-});
 // clouds
 app.get("/v1/clouds", (req, res) => {
     const response = {
@@ -71,37 +48,41 @@ app.get("/v1/clouds/:provider/region/:region", (req, res) => {
 app.get("/v1/users/:userId", (req, res) => {
     const response = {
         userId: "u-1",
-        auth0Id: "a-1",
         firstName: "John",
         lastName: "Doe",
         email: "john.doe@aerospike.com",
         picture: "https://picsum.photos/id/237/300/300",
+        organizationIds: ["o-1"],
     };
     res.json(response);
 });
 app.put("/v1/users/:userId", (req, res) => {
     const response = {
         userId: "u-1",
-        auth0Id: "a-1",
         firstName: "Jane",
         lastName: "Deer",
         email: "john.doe@aerospike.com",
-        picture: "https://picsum.photos/id/237/300/300",
     };
     res.json(response);
 });
 app.put("/v1/users/:userId/profilePicture", (req, res) => {
     const response = {
         userId: "u-1",
-        auth0Id: "a-1",
         firstName: "John",
         lastName: "Doe",
         email: "john.doe@aerospike.com",
-        picture: "https://picsum.photos/id/433/300/300",
     };
     res.json(response);
 });
 // organization
+app.post("/v1/organizations", (req, res) => {
+    const response = {
+        id: "0-1",
+        name: "dbaas-org",
+        description: "Organization for dbaas",
+    };
+    res.send(response);
+});
 app.get("/v1/organizations/:organizationId/databases", (req, res) => {
     const { organizationId } = req.params;
     const response = {
@@ -447,39 +428,33 @@ app.get("/v1/organizations/:organizationId/members", (req, res) => {
                 role: "Admin",
                 user: {
                     userId: "u-1",
-                    auth0Id: "a-1",
                     firstName: "John",
                     lastName: "Doe",
                     email: "john.doe@aerospike.com",
-                    picture: "https://picsum.photos/id/237/300/300",
                 },
             },
             {
                 role: "Viewer",
                 user: {
                     userId: "u-2",
-                    auth0Id: "a-2",
                     firstName: "Jane",
                     lastName: "Deer",
                     email: "jane.deer@aerospike.com",
-                    picture: "https://picsum.photos/id/433/300/300",
                 },
             },
         ],
     };
     res.send(response);
 });
-app.post("/v1/organizations/:organizationId/members/:userId", (req, res) => {
+app.put("/v1/organizations/:organizationId/members/:userId", (req, res) => {
     const { organizationId, userId } = req.params;
     const response = {
         role: "Viewer",
         user: {
             userId: "u-1",
-            auth0Id: "a-1",
             firstName: "John",
             lastName: "Doe",
             email: "john.doe@aerospike.com",
-            picture: "https://picsum.photos/id/237/300/300",
         },
     };
     res.send(response);
