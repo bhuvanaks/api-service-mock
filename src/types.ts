@@ -1,5 +1,3 @@
-export type GetAuthContextApiResponse = /** status 200 Context */ AuthContext;
-export type GetAuthContextApiArg = void;
 export type GetCloudsApiResponse = /** status 200 Successful operation */ {
   results?: CloudProviderInfo[];
 };
@@ -17,7 +15,8 @@ export type CreateUserApiArg = {
   /** create user in Aerospike DBaaS */
   createUserRequest: CreateUserRequest;
 };
-export type GetUserByIdApiResponse = /** status 200 Successful operation */ User;
+export type GetUserByIdApiResponse =
+  /** status 200 Successful operation */ User;
 export type GetUserByIdApiArg = {
   /** ID of user */
   userId: string;
@@ -29,7 +28,8 @@ export type UpdateUserApiArg = {
   /** Update an existent user in Aerospike DBaaS */
   updateUserRequest: UpdateUserRequest;
 };
-export type UpdateUserProfilePictureApiResponse = /** status 200 Successful operation */ User;
+export type UpdateUserProfilePictureApiResponse =
+  /** status 200 Successful operation */ User;
 export type UpdateUserProfilePictureApiArg = {
   /** userId for the user which needs to be updated */
   userId: string;
@@ -38,7 +38,8 @@ export type UpdateUserProfilePictureApiArg = {
     profilePicture?: Blob;
   };
 };
-export type GetOrganizationApiResponse = /** status 200 Successful operation */ Organization;
+export type GetOrganizationApiResponse =
+  /** status 200 Successful operation */ Organization;
 export type GetOrganizationApiArg = {
   /** ID of organization */
   organizationId: string;
@@ -75,7 +76,8 @@ export type UpdateOrganizationMemberApiArg = {
     role?: OrganizationMemberRole;
   };
 };
-export type RemoveOrganizationMemberApiResponse = /** status 204 Successful operation */ undefined;
+export type RemoveOrganizationMemberApiResponse =
+  /** status 204 Successful operation */ undefined;
 export type RemoveOrganizationMemberApiArg = {
   /** ID of organization */
   organizationId: string;
@@ -95,23 +97,24 @@ export type GetOrganizationDatabasesApiArg = {
   offset?: number;
   sort?:
     | {
-        name?: 'ASC' | 'DESC';
+        name?: "ASC" | "DESC";
       }
     | {
-        status?: 'ASC' | 'DESC';
+        status?: "ASC" | "DESC";
       }
     | {
-        createdAt?: 'ASC' | 'DESC';
+        createdAt?: "ASC" | "DESC";
       }
     | {
-        lastModifiedAt?: 'ASC' | 'DESC';
+        lastModifiedAt?: "ASC" | "DESC";
       };
   filter?: {
     name?: string;
     health?: DatabaseHealthStatus | DatabaseHealthStatus[];
   };
 };
-export type CreateDatabaseApiResponse = /** status 202 Successful operation */ Database;
+export type CreateDatabaseApiResponse =
+  /** status 202 Successful operation */ Database;
 export type CreateDatabaseApiArg = {
   /** ID of organization */
   organizationId: string;
@@ -122,14 +125,16 @@ export type CreateDatabaseApiArg = {
     region?: string;
   };
 };
-export type GetDatabaseByIdApiResponse = /** status 200 Successful operation */ Database;
+export type GetDatabaseByIdApiResponse =
+  /** status 200 Successful operation */ Database;
 export type GetDatabaseByIdApiArg = {
   /** ID of organization */
   organizationId: string;
   /** ID of database to get */
   databaseId: string;
 };
-export type UpdateDatabaseApiResponse = /** status 202 Successful operation */ Database;
+export type UpdateDatabaseApiResponse =
+  /** status 202 Successful operation */ Database;
 export type UpdateDatabaseApiArg = {
   /** ID of organization */
   organizationId: string;
@@ -138,7 +143,8 @@ export type UpdateDatabaseApiArg = {
   /** Update database body */
   databaseConfig: DatabaseConfig;
 };
-export type DeleteDatabaseByIdApiResponse = /** status 200 Successful operation */ Database;
+export type DeleteDatabaseByIdApiResponse =
+  /** status 200 Successful operation */ Database;
 export type DeleteDatabaseByIdApiArg = {
   /** ID of organization */
   organizationId: string;
@@ -149,32 +155,35 @@ export type GetV1OrganizationsByOrganizationIdDatabasesAndDatabaseIdConnectionDe
   /** status 200 Successful operation */ {
     results?: DatabaseConnectionInfo[];
   };
-export type GetV1OrganizationsByOrganizationIdDatabasesAndDatabaseIdConnectionDetailsApiArg = {
-  /** ID of organization */
-  organizationId: string;
-  /** ID of database to get */
-  databaseId: string;
-};
+export type GetV1OrganizationsByOrganizationIdDatabasesAndDatabaseIdConnectionDetailsApiArg =
+  {
+    /** ID of organization */
+    organizationId: string;
+    /** ID of database to get */
+    databaseId: string;
+  };
 export type User = {
   userId?: string;
-  auth0Id?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+};
+export type UserDetails = {
+  userId?: string;
   firstName?: string;
   lastName?: string;
   email?: string;
   picture?: string;
+  organizationIds?: string[];
 };
 export type OrganizationInfo = {
   id?: string;
   name?: string;
 };
-export type OrganizationMemberRole = 'Viewer' | 'Admin' | 'Owner';
+export type OrganizationMemberRole = "Viewer" | "Admin" | "Owner";
 export type OrganizationMemberInfo = {
   organization?: OrganizationInfo;
   role?: OrganizationMemberRole;
-};
-export type AuthContext = {
-  user?: User;
-  memberships?: OrganizationMemberInfo[];
 };
 export type ApiError = {
   code?: string;
@@ -182,7 +191,7 @@ export type ApiError = {
   errorId?: string;
   [key: string]: any;
 };
-export type CloudProviderRegionAvailability = 'Online' | 'Offline';
+export type CloudProviderRegionAvailability = "Online" | "Offline";
 export type CloudProviderRegionInfo = {
   id?: string;
   name?: string;
@@ -195,20 +204,19 @@ export type CloudProviderInfo = {
   regions?: CloudProviderRegionInfo[];
 };
 export type CreateUserRequest = {
-  auth0Id?: string;
+  userId?: string;
   firstName?: string;
   lastName?: string;
   email?: string;
-  picture?: string;
 };
 export type UpdateUserRequest = {
   firstName?: string;
   lastName?: string;
-  picture?: string;
 };
 export type Organization = {
   id?: string;
   name?: string;
+  description?: string;
 };
 export type OffsetPaginatedList = {
   limit?: number;
@@ -222,17 +230,17 @@ export type OrganizationMember = {
   user?: User;
 };
 export type DatabaseStatusRunning = {
-  value?: 'running';
+  value?: "running";
 };
 export type DatabaseStatusStopped = {
-  value?: 'stopped';
+  value?: "stopped";
 };
 export type DatabaseStatusTerminating = {
   operationId?: string;
-  value?: 'terminating';
+  value?: "terminating";
 };
 export type DatabaseStatusCreating = {
-  value?: 'creating';
+  value?: "creating";
   details?: {
     operationId?: string;
     requestedAt?: string;
@@ -243,7 +251,7 @@ export type DatabaseConfig = {
   maxCapacity?: string;
 };
 export type DatabaseStatusUpdating = {
-  value?: 'updating';
+  value?: "updating";
   config?: {
     operationId?: string;
     startedAt?: string;
@@ -264,7 +272,7 @@ export type DatabaseInfo = {
   createdAt?: string;
   lastModifiedAt?: string;
 };
-export type DatabaseHealthStatus = 'healthy' | 'unhealthy' | 'unknown';
+export type DatabaseHealthStatus = "healthy" | "unhealthy" | "unknown";
 export type MetricDescription = {
   name: string;
   units: string;
@@ -293,7 +301,7 @@ export type Database = {
 };
 export type DatabaseConnectionInfo = {
   endpoint?: string;
-  type?: 'access_key';
+  type?: "access_key";
   info?: {
     access_key?: string;
     access_secret?: string;

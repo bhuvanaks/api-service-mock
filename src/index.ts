@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import {
-  AuthContext,
   DatabaseListItem,
   GetCloudsApiResponse,
   GetOrganizationDatabasesApiResponse,
@@ -9,38 +8,13 @@ import {
   GetOrganizationMembersApiResponse,
   OrganizationMember,
   User,
+  UserDetails,
+  Organization,
 } from "./types";
 const app = express();
 app.use(cors());
 
 const PORT = process.env.PORT || 3001;
-
-// auth
-app.get(
-  "/v1/auth/context",
-  (req: Request, res: Response<AuthContext>): void => {
-    const response: AuthContext = {
-      user: {
-        userId: "u-1",
-        auth0Id: "a-1",
-        firstName: "John",
-        lastName: "Doe",
-        email: "john.doe@aerospike.com",
-        picture: "https://picsum.photos/id/237/300/300",
-      },
-      memberships: [
-        {
-          organization: {
-            id: "o-1",
-            name: "John-Organization",
-          },
-          role: "Owner",
-        },
-      ],
-    };
-    res.json(response);
-  }
-);
 
 // clouds
 app.get(
@@ -87,26 +61,27 @@ app.get(
 );
 
 // users
-app.get("/v1/users/:userId", (req: Request, res: Response<User>): void => {
-  const response: User = {
-    userId: "u-1",
-    auth0Id: "a-1",
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@aerospike.com",
-    picture: "https://picsum.photos/id/237/300/300",
-  };
-  res.json(response);
-});
+app.get(
+  "/v1/users/:userId",
+  (req: Request, res: Response<UserDetails>): void => {
+    const response: UserDetails = {
+      userId: "u-1",
+      firstName: "John",
+      lastName: "Doe",
+      email: "john.doe@aerospike.com",
+      picture: "https://picsum.photos/id/237/300/300",
+      organizationIds: ["o-1"],
+    };
+    res.json(response);
+  }
+);
 
 app.put("/v1/users/:userId", (req: Request, res: Response<User>): void => {
   const response: User = {
     userId: "u-1",
-    auth0Id: "a-1",
     firstName: "Jane",
     lastName: "Deer",
     email: "john.doe@aerospike.com",
-    picture: "https://picsum.photos/id/237/300/300",
   };
   res.json(response);
 });
@@ -116,17 +91,26 @@ app.put(
   (req: Request, res: Response<User>): void => {
     const response: User = {
       userId: "u-1",
-      auth0Id: "a-1",
       firstName: "John",
       lastName: "Doe",
       email: "john.doe@aerospike.com",
-      picture: "https://picsum.photos/id/433/300/300",
     };
     res.json(response);
   }
 );
 
 // organization
+app.post(
+  "/v1/organizations",
+  (req: Request, res: Response<Organization>): void => {
+    const response: Organization = {
+      id: "0-1",
+      name: "dbaas-org",
+      description: "Organization for dbaas",
+    };
+    res.send(response);
+  }
+);
 app.get(
   "/v1/organizations/:organizationId/databases",
   (req: Request, res: Response<GetOrganizationDatabasesApiResponse>): void => {
@@ -496,22 +480,18 @@ app.get(
           role: "Admin",
           user: {
             userId: "u-1",
-            auth0Id: "a-1",
             firstName: "John",
             lastName: "Doe",
             email: "john.doe@aerospike.com",
-            picture: "https://picsum.photos/id/237/300/300",
           },
         },
         {
           role: "Viewer",
           user: {
             userId: "u-2",
-            auth0Id: "a-2",
             firstName: "Jane",
             lastName: "Deer",
             email: "jane.deer@aerospike.com",
-            picture: "https://picsum.photos/id/433/300/300",
           },
         },
       ],
@@ -521,7 +501,7 @@ app.get(
   }
 );
 
-app.post(
+app.put(
   "/v1/organizations/:organizationId/members/:userId",
   (req: Request, res: Response<OrganizationMember>): void => {
     const { organizationId, userId } = req.params;
@@ -529,11 +509,9 @@ app.post(
       role: "Viewer",
       user: {
         userId: "u-1",
-        auth0Id: "a-1",
         firstName: "John",
         lastName: "Doe",
         email: "john.doe@aerospike.com",
-        picture: "https://picsum.photos/id/237/300/300",
       },
     };
     res.send(response);
