@@ -111,6 +111,8 @@ app.post(
     res.send(response);
   }
 );
+
+// databases
 app.get(
   "/v1/organizations/:organizationId/databases",
   (req: Request, res: Response<GetOrganizationDatabasesApiResponse>): void => {
@@ -127,7 +129,7 @@ app.get(
             value: "running",
           },
           info: {
-            name: "Sample Database",
+            name: "SampleDatabase",
             provider: "AWS",
             region: "us-east-1",
             createdAt: "2015-07-20T15:49:04-07:00",
@@ -175,7 +177,7 @@ app.get(
             value: "creating",
           },
           info: {
-            name: "Sample Long Name",
+            name: "SampleLongName",
             provider: "AWS",
             region: "us-east-1",
             createdAt: "2015-07-20T15:49:04-07:00",
@@ -223,7 +225,7 @@ app.get(
             value: "updating",
           },
           info: {
-            name: "Another Sample",
+            name: "Another_Sample",
             provider: "AWS",
             region: "us-east-1",
             createdAt: "2015-07-20T15:49:04-07:00",
@@ -271,7 +273,7 @@ app.get(
             value: "terminating",
           },
           info: {
-            name: "Another Really Long Name",
+            name: "Max_characters_really_long_name",
             provider: "AWS",
             region: "us-east-1",
             createdAt: "2015-07-20T15:49:04-07:00",
@@ -330,7 +332,7 @@ app.get(
         value: "running",
       },
       info: {
-        name: "Sample Database",
+        name: "Sample_Database",
         provider: "AWS",
         region: "us-east-1",
         createdAt: "2015-07-20T15:49:04-07:00",
@@ -386,7 +388,6 @@ app.get(
         },
       ],
     };
-
     res.send(response);
   }
 );
@@ -401,7 +402,7 @@ app.post(
         value: "running",
       },
       info: {
-        name: "my-db",
+        name: "my_db",
         provider: "AWS",
         region: "us-east-1",
         createdAt: "2015-07-20T15:49:04-07:00",
@@ -460,7 +461,6 @@ app.delete(
     const { organizationId, databaseId } = req.params;
 
     const response: DatabaseListItem = {};
-
     res.send(response);
   }
 );
@@ -496,7 +496,24 @@ app.get(
         },
       ],
     };
+    res.send(response);
+  }
+);
 
+app.post(
+  "/v1/organizations/:organizationId/members",
+  (req: Request, res: Response<OrganizationMember>): void => {
+    const { organizationId } = req.params;
+
+    const response: OrganizationMember = {
+      role: "Admin",
+      user: {
+        userId: "u-1",
+        firstName: "Jane",
+        lastName: "Deer",
+        email: "jane.deer@aerospike.com",
+      },
+    };
     res.send(response);
   }
 );
@@ -505,6 +522,7 @@ app.put(
   "/v1/organizations/:organizationId/members/:userId",
   (req: Request, res: Response<OrganizationMember>): void => {
     const { organizationId, userId } = req.params;
+
     const response: OrganizationMember = {
       role: "Viewer",
       user: {
@@ -524,7 +542,6 @@ app.delete(
     const { organizationId, userId } = req.params;
 
     const response = {};
-
     res.send(response);
   }
 );
