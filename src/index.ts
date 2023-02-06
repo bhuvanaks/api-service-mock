@@ -10,6 +10,7 @@ import {
   User,
   UserDetails,
   Organization,
+  ApiError,
 } from "./types";
 const app = express();
 app.use(cors());
@@ -460,8 +461,8 @@ app.delete(
   (req: Request, res: Response): void => {
     const { organizationId, databaseId } = req.params;
 
-    const response: DatabaseListItem = {};
-    res.send(response);
+    const response: ApiError = { message: `Couldn't reach servers` };
+    res.status(400).send(response);
   }
 );
 
@@ -502,19 +503,11 @@ app.get(
 
 app.post(
   "/v1/organizations/:organizationId/members",
-  (req: Request, res: Response<OrganizationMember>): void => {
+  (req: Request, res: Response<ApiError>): void => {
     const { organizationId } = req.params;
 
-    const response: OrganizationMember = {
-      role: "Admin",
-      user: {
-        userId: "u-1",
-        firstName: "Jane",
-        lastName: "Deer",
-        email: "jane.deer@aerospike.com",
-      },
-    };
-    res.send(response);
+    const response: ApiError = { message: `Couldn't reach servers` };
+    res.status(400).send(response);
   }
 );
 
