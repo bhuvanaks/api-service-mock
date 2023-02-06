@@ -83,6 +83,7 @@ app.post("/v1/organizations", (req, res) => {
     };
     res.send(response);
 });
+// databases
 app.get("/v1/organizations/:organizationId/databases", (req, res) => {
     const { organizationId } = req.params;
     const response = {
@@ -96,7 +97,7 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
                     value: "running",
                 },
                 info: {
-                    name: "Sample Database",
+                    name: "SampleDatabase",
                     provider: "AWS",
                     region: "us-east-1",
                     createdAt: "2015-07-20T15:49:04-07:00",
@@ -144,7 +145,7 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
                     value: "creating",
                 },
                 info: {
-                    name: "Sample Long Name",
+                    name: "SampleLongName",
                     provider: "AWS",
                     region: "us-east-1",
                     createdAt: "2015-07-20T15:49:04-07:00",
@@ -192,7 +193,7 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
                     value: "updating",
                 },
                 info: {
-                    name: "Another Sample",
+                    name: "Another_Sample",
                     provider: "AWS",
                     region: "us-east-1",
                     createdAt: "2015-07-20T15:49:04-07:00",
@@ -240,7 +241,7 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
                     value: "terminating",
                 },
                 info: {
-                    name: "Another Really Long Name",
+                    name: "Max_characters_really_long_name",
                     provider: "AWS",
                     region: "us-east-1",
                     createdAt: "2015-07-20T15:49:04-07:00",
@@ -294,7 +295,7 @@ app.get("/v1/organizations/:organizationId/databases/:databaseId", (req, res) =>
             value: "running",
         },
         info: {
-            name: "Sample Database",
+            name: "Sample_Database",
             provider: "AWS",
             region: "us-east-1",
             createdAt: "2015-07-20T15:49:04-07:00",
@@ -360,7 +361,7 @@ app.post("/v1/organizations/:organizationId/databases", (req, res) => {
             value: "running",
         },
         info: {
-            name: "my-db",
+            name: "my_db",
             provider: "AWS",
             region: "us-east-1",
             createdAt: "2015-07-20T15:49:04-07:00",
@@ -443,6 +444,19 @@ app.get("/v1/organizations/:organizationId/members", (req, res) => {
                 },
             },
         ],
+    };
+    res.send(response);
+});
+app.post("/v1/organizations/:organizationId/members", (req, res) => {
+    const { organizationId } = req.params;
+    const response = {
+        role: "Admin",
+        user: {
+            userId: "u-1",
+            firstName: "Jane",
+            lastName: "Deer",
+            email: "jane.deer@aerospike.com",
+        },
     };
     res.send(response);
 });
