@@ -180,7 +180,7 @@ export type OrganizationInfo = {
   id?: string;
   name?: string;
 };
-export type OrganizationMemberRole = "Viewer" | "Admin" | "Owner";
+export type OrganizationMemberRole = "OrgAdmin" | "DBViewer" | "DBAdmin";
 export type OrganizationMemberInfo = {
   organization?: OrganizationInfo;
   role?: OrganizationMemberRole;
@@ -230,17 +230,17 @@ export type OrganizationMember = {
   user?: User;
 };
 export type DatabaseStatusRunning = {
-  value?: "running";
+  value?: "RUNNING";
 };
-export type DatabaseStatusStopped = {
-  value?: "stopped";
+export type DatabaseStatusDecommissioned = {
+  value?: "DECOMMISSIONED";
 };
 export type DatabaseStatusTerminating = {
   operationId?: string;
-  value?: "terminating";
+  value?: "TERMINATING";
 };
 export type DatabaseStatusCreating = {
-  value?: "creating";
+  value?: "CREATING";
   details?: {
     operationId?: string;
     requestedAt?: string;
@@ -251,7 +251,7 @@ export type DatabaseConfig = {
   maxCapacity?: string;
 };
 export type DatabaseStatusUpdating = {
-  value?: "updating";
+  value?: "UPDATING";
   config?: {
     operationId?: string;
     startedAt?: string;
@@ -261,7 +261,7 @@ export type DatabaseStatusUpdating = {
 };
 export type DatabaseStatus =
   | DatabaseStatusRunning
-  | DatabaseStatusStopped
+  | DatabaseStatusDecommissioned
   | DatabaseStatusTerminating
   | DatabaseStatusCreating
   | DatabaseStatusUpdating;
@@ -272,7 +272,7 @@ export type DatabaseInfo = {
   createdAt?: string;
   lastModifiedAt?: string;
 };
-export type DatabaseHealthStatus = "healthy" | "unhealthy" | "unknown";
+export type DatabaseHealthStatus = "HEALTHY" | "UNHEALTHY" | "UNKNOWN";
 export type MetricDescription = {
   name: string;
   units: string;
