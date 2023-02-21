@@ -126,7 +126,7 @@ app.get(
         {
           id: "1",
           status: {
-            value: "running",
+            value: "RUNNING",
           },
           info: {
             name: "SampleDatabase",
@@ -135,7 +135,7 @@ app.get(
             createdAt: "2015-07-20T15:49:04-07:00",
             lastModifiedAt: "2015-07-20T15:49:04-07:00",
           },
-          health: "healthy",
+          health: "HEALTHY",
           utilization: [
             {
               metric: {
@@ -174,7 +174,7 @@ app.get(
         {
           id: "2",
           status: {
-            value: "creating",
+            value: "CREATING",
           },
           info: {
             name: "SampleLongName",
@@ -183,7 +183,7 @@ app.get(
             createdAt: "2015-07-20T15:49:04-07:00",
             lastModifiedAt: "2015-07-20T15:49:04-07:00",
           },
-          health: "unhealthy",
+          health: "UNHEALTHY",
           utilization: [
             {
               metric: {
@@ -222,7 +222,7 @@ app.get(
         {
           id: "3",
           status: {
-            value: "updating",
+            value: "UPDATING",
           },
           info: {
             name: "Another_Sample",
@@ -231,7 +231,7 @@ app.get(
             createdAt: "2015-07-20T15:49:04-07:00",
             lastModifiedAt: "2015-07-20T15:49:04-07:00",
           },
-          health: "healthy",
+          health: "HEALTHY",
           utilization: [
             {
               metric: {
@@ -270,7 +270,7 @@ app.get(
         {
           id: "4",
           status: {
-            value: "terminating",
+            value: "TERMINATING",
           },
           info: {
             name: "Max_characters_really_long_name",
@@ -279,7 +279,7 @@ app.get(
             createdAt: "2015-07-20T15:49:04-07:00",
             lastModifiedAt: "2015-07-20T15:49:04-07:00",
           },
-          health: "unknown",
+          health: "UNKNOWN",
           utilization: [
             {
               metric: {
@@ -329,7 +329,7 @@ app.get(
     const response: DatabaseListItem = {
       id: "1",
       status: {
-        value: "running",
+        value: "RUNNING",
       },
       info: {
         name: "Sample_Database",
@@ -338,7 +338,7 @@ app.get(
         createdAt: "2015-07-20T15:49:04-07:00",
         lastModifiedAt: "2015-07-20T15:49:04-07:00",
       },
-      health: "healthy",
+      health: "HEALTHY",
       utilization: [
         {
           metric: {
@@ -399,7 +399,7 @@ app.post(
     const response: DatabaseListItem = {
       id: "5",
       status: {
-        value: "running",
+        value: "RUNNING",
       },
       info: {
         name: "my_db",
@@ -408,7 +408,7 @@ app.post(
         createdAt: "2015-07-20T15:49:04-07:00",
         lastModifiedAt: "2015-07-20T15:49:04-07:00",
       },
-      health: "healthy",
+      health: "HEALTHY",
       utilization: [
         {
           metric: {
@@ -477,7 +477,7 @@ app.get(
       pages: 0,
       results: [
         {
-          role: "Admin",
+          role: "OrgAdmin",
           user: {
             userId: "u-1",
             firstName: "John",
@@ -486,7 +486,7 @@ app.get(
           },
         },
         {
-          role: "Viewer",
+          role: "DBViewer",
           user: {
             userId: "u-2",
             firstName: "Jane",
@@ -506,7 +506,7 @@ app.post(
     const { organizationId } = req.params;
 
     const response: OrganizationMember = {
-      role: "Admin",
+      role: "OrgAdmin",
       user: {
         userId: "u-1",
         firstName: "Jane",
@@ -524,7 +524,7 @@ app.put(
     const { organizationId, userId } = req.params;
 
     const response: OrganizationMember = {
-      role: "Viewer",
+      role: "DBViewer",
       user: {
         userId: "u-1",
         firstName: "John",

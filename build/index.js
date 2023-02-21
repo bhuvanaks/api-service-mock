@@ -94,7 +94,7 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
             {
                 id: "1",
                 status: {
-                    value: "running",
+                    value: "RUNNING",
                 },
                 info: {
                     name: "SampleDatabase",
@@ -103,7 +103,7 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
                     createdAt: "2015-07-20T15:49:04-07:00",
                     lastModifiedAt: "2015-07-20T15:49:04-07:00",
                 },
-                health: "healthy",
+                health: "HEALTHY",
                 utilization: [
                     {
                         metric: {
@@ -142,7 +142,7 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
             {
                 id: "2",
                 status: {
-                    value: "creating",
+                    value: "CREATING",
                 },
                 info: {
                     name: "SampleLongName",
@@ -151,7 +151,7 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
                     createdAt: "2015-07-20T15:49:04-07:00",
                     lastModifiedAt: "2015-07-20T15:49:04-07:00",
                 },
-                health: "unhealthy",
+                health: "UNHEALTHY",
                 utilization: [
                     {
                         metric: {
@@ -190,7 +190,7 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
             {
                 id: "3",
                 status: {
-                    value: "updating",
+                    value: "UPDATING",
                 },
                 info: {
                     name: "Another_Sample",
@@ -199,7 +199,7 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
                     createdAt: "2015-07-20T15:49:04-07:00",
                     lastModifiedAt: "2015-07-20T15:49:04-07:00",
                 },
-                health: "healthy",
+                health: "HEALTHY",
                 utilization: [
                     {
                         metric: {
@@ -238,7 +238,7 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
             {
                 id: "4",
                 status: {
-                    value: "terminating",
+                    value: "TERMINATING",
                 },
                 info: {
                     name: "Max_characters_really_long_name",
@@ -247,7 +247,7 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
                     createdAt: "2015-07-20T15:49:04-07:00",
                     lastModifiedAt: "2015-07-20T15:49:04-07:00",
                 },
-                health: "unknown",
+                health: "UNKNOWN",
                 utilization: [
                     {
                         metric: {
@@ -292,7 +292,7 @@ app.get("/v1/organizations/:organizationId/databases/:databaseId", (req, res) =>
     const response = {
         id: "1",
         status: {
-            value: "running",
+            value: "RUNNING",
         },
         info: {
             name: "Sample_Database",
@@ -301,7 +301,7 @@ app.get("/v1/organizations/:organizationId/databases/:databaseId", (req, res) =>
             createdAt: "2015-07-20T15:49:04-07:00",
             lastModifiedAt: "2015-07-20T15:49:04-07:00",
         },
-        health: "healthy",
+        health: "HEALTHY",
         utilization: [
             {
                 metric: {
@@ -358,7 +358,7 @@ app.post("/v1/organizations/:organizationId/databases", (req, res) => {
     const response = {
         id: "5",
         status: {
-            value: "running",
+            value: "RUNNING",
         },
         info: {
             name: "my_db",
@@ -367,7 +367,7 @@ app.post("/v1/organizations/:organizationId/databases", (req, res) => {
             createdAt: "2015-07-20T15:49:04-07:00",
             lastModifiedAt: "2015-07-20T15:49:04-07:00",
         },
-        health: "healthy",
+        health: "HEALTHY",
         utilization: [
             {
                 metric: {
@@ -426,7 +426,7 @@ app.get("/v1/organizations/:organizationId/members", (req, res) => {
         pages: 0,
         results: [
             {
-                role: "Admin",
+                role: "OrgAdmin",
                 user: {
                     userId: "u-1",
                     firstName: "John",
@@ -435,7 +435,7 @@ app.get("/v1/organizations/:organizationId/members", (req, res) => {
                 },
             },
             {
-                role: "Viewer",
+                role: "DBViewer",
                 user: {
                     userId: "u-2",
                     firstName: "Jane",
@@ -450,7 +450,7 @@ app.get("/v1/organizations/:organizationId/members", (req, res) => {
 app.post("/v1/organizations/:organizationId/members", (req, res) => {
     const { organizationId } = req.params;
     const response = {
-        role: "Admin",
+        role: "OrgAdmin",
         user: {
             userId: "u-1",
             firstName: "Jane",
@@ -463,7 +463,7 @@ app.post("/v1/organizations/:organizationId/members", (req, res) => {
 app.put("/v1/organizations/:organizationId/members/:userId", (req, res) => {
     const { organizationId, userId } = req.params;
     const response = {
-        role: "Viewer",
+        role: "DBViewer",
         user: {
             userId: "u-1",
             firstName: "John",
