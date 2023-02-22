@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import {
+  ApiError,
   DatabaseListItem,
   GetCloudsApiResponse,
   GetOrganizationDatabasesApiResponse,
@@ -42,7 +43,7 @@ app.get(
 
 // region info
 app.get(
-  "/v1/clouds/:provider/region/:region",
+  "/v1/clouds/:provider/regions/:region",
   (req: Request, res: Response<GetProviderRegionInfoApiResponse>): void => {
     const response: GetProviderRegionInfoApiResponse = {
       cloudId: "123",
@@ -104,7 +105,7 @@ app.post(
   "/v1/organizations",
   (req: Request, res: Response<Organization>): void => {
     const response: Organization = {
-      id: "0-1",
+      id: "o-1",
       name: "dbaas-org",
       description: "Organization for dbaas",
     };
@@ -332,7 +333,7 @@ app.get(
         value: "RUNNING",
       },
       info: {
-        name: "Sample_Database",
+        name: "SampleDatabase",
         provider: "AWS",
         region: "us-east-1",
         createdAt: "2015-07-20T15:49:04-07:00",
@@ -371,69 +372,6 @@ app.get(
             units: "",
           },
           value: 0,
-        },
-        {
-          metric: {
-            name: "uniqueData",
-            units: "",
-          },
-          value: 0,
-        },
-        {
-          metric: {
-            name: "nodes",
-            units: "",
-          },
-          value: 3,
-        },
-      ],
-    };
-    res.send(response);
-  }
-);
-
-app.post(
-  "/v1/organizations/:organizationId/databases",
-  (req: Request, res: Response<DatabaseListItem>): void => {
-    const { organizationId } = req.params;
-    const response: DatabaseListItem = {
-      id: "5",
-      status: {
-        value: "RUNNING",
-      },
-      info: {
-        name: "my_db",
-        provider: "AWS",
-        region: "us-east-1",
-        createdAt: "2015-07-20T15:49:04-07:00",
-        lastModifiedAt: "2015-07-20T15:49:04-07:00",
-      },
-      health: "HEALTHY",
-      utilization: [
-        {
-          metric: {
-            name: "reads",
-            units: "",
-          },
-          value: 12,
-          period: "10m",
-          change: 10,
-        },
-        {
-          metric: {
-            name: "writes",
-            units: "",
-          },
-          value: 12,
-          period: "10m",
-          change: 10,
-        },
-        {
-          metric: {
-            name: "storage",
-            units: "GB",
-          },
-          value: 104.74,
         },
         {
           metric: {

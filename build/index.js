@@ -29,7 +29,7 @@ app.get("/v1/clouds", (req, res) => {
     res.json(response);
 });
 // region info
-app.get("/v1/clouds/:provider/region/:region", (req, res) => {
+app.get("/v1/clouds/:provider/regions/:region", (req, res) => {
     const response = {
         cloudId: "123",
         provider: "aws",
@@ -77,7 +77,7 @@ app.put("/v1/users/:userId/profilePicture", (req, res) => {
 // organization
 app.post("/v1/organizations", (req, res) => {
     const response = {
-        id: "0-1",
+        id: "o-1",
         name: "dbaas-org",
         description: "Organization for dbaas",
     };
@@ -295,7 +295,7 @@ app.get("/v1/organizations/:organizationId/databases/:databaseId", (req, res) =>
             value: "RUNNING",
         },
         info: {
-            name: "Sample_Database",
+            name: "SampleDatabase",
             provider: "AWS",
             region: "us-east-1",
             createdAt: "2015-07-20T15:49:04-07:00",
@@ -334,65 +334,6 @@ app.get("/v1/organizations/:organizationId/databases/:databaseId", (req, res) =>
                     units: "",
                 },
                 value: 0,
-            },
-            {
-                metric: {
-                    name: "uniqueData",
-                    units: "",
-                },
-                value: 0,
-            },
-            {
-                metric: {
-                    name: "nodes",
-                    units: "",
-                },
-                value: 3,
-            },
-        ],
-    };
-    res.send(response);
-});
-app.post("/v1/organizations/:organizationId/databases", (req, res) => {
-    const { organizationId } = req.params;
-    const response = {
-        id: "5",
-        status: {
-            value: "RUNNING",
-        },
-        info: {
-            name: "my_db",
-            provider: "AWS",
-            region: "us-east-1",
-            createdAt: "2015-07-20T15:49:04-07:00",
-            lastModifiedAt: "2015-07-20T15:49:04-07:00",
-        },
-        health: "HEALTHY",
-        utilization: [
-            {
-                metric: {
-                    name: "reads",
-                    units: "",
-                },
-                value: 12,
-                period: "10m",
-                change: 10,
-            },
-            {
-                metric: {
-                    name: "writes",
-                    units: "",
-                },
-                value: 12,
-                period: "10m",
-                change: 10,
-            },
-            {
-                metric: {
-                    name: "storage",
-                    units: "GB",
-                },
-                value: 104.74,
             },
             {
                 metric: {
