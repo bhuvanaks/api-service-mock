@@ -75,6 +75,15 @@ app.put("/v1/users/:userId/profilePicture", (req, res) => {
     res.json(response);
 });
 // organization
+app.get("/v1/organizations/:organizationId", (req, res) => {
+    const { organizationId } = req.params;
+    const response = {
+        id: "o-1",
+        name: "dbaas_org",
+        description: "Organization for dbaas",
+    };
+    res.send(response);
+});
 app.post("/v1/organizations", (req, res) => {
     const response = {
         id: "o-1",
