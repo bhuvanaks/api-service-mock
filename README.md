@@ -15,4 +15,4 @@ Before pushing to github, make sure to build TS->JS with `yarn build`. That will
 
 ## Auto deploying
 
-After you push changes, the app will be auto deployed to `https://as-mock.onrender.com/` (deploy process can take about 5 minutes)
+After you push changes, the app will be auto deployed to `https://api-service-mock.onrender.com` (deploy process can take about 5 minutes)
