@@ -147,6 +147,16 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
                         value: 0,
                     },
                 ],
+                apiKeys: [{
+                        id: '44e128a5-ac7a-4c9a-be4c-224b6bf81b2',
+                        name: 'root',
+                    }, {
+                        id: '44e128a5-ac7a-4c9a-be4c-fsd3rsdfefd',
+                        name: 'administrators',
+                    }, {
+                        id: '44e128a5-ac7a-4c9a-be4c-224b6bf8231',
+                        name: 'customers',
+                    }]
             },
             {
                 id: "2",
@@ -195,6 +205,13 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
                         value: 0,
                     },
                 ],
+                apiKeys: [{
+                        id: '44e128fd-ac7a-4c9a-be4c-224b6bf81b20',
+                        name: 'root',
+                    }, {
+                        id: '3424fsfg-ac7a-4c9a-be4c-224b6bf81b20',
+                        name: 'administrators',
+                    }]
             },
             {
                 id: "3",
@@ -242,7 +259,7 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
                         },
                         value: 0,
                     },
-                ],
+                ], apiKeys: []
             },
             {
                 id: "4",
@@ -291,6 +308,7 @@ app.get("/v1/organizations/:organizationId/databases", (req, res) => {
                         value: 0,
                     },
                 ],
+                apiKeys: []
             },
         ],
     };
@@ -359,6 +377,26 @@ app.get("/v1/organizations/:organizationId/databases/:databaseId", (req, res) =>
                 value: 3,
             },
         ],
+        apiKeys: [{
+                id: '44e128a5-ac7a-4c9a-be4c-224b6bf81b2',
+                name: 'Root',
+            }, {
+                id: '44e128a5-ac7a-4c9a-be4c-fsd3rsdfefd',
+                name: 'Administrators',
+            }, {
+                id: '44e128a5-ac7a-4c9a-be4c-224b6bf8231',
+                name: 'Customers',
+            }]
+    };
+    res.send(response);
+});
+// ApiKey
+app.post("/v1/organizations/:organizationId/databases/:databaseId/api-key", (req, res) => {
+    const { organizationId, databaseId } = req.params;
+    const response = {
+        id: '4fsd4543-ac7a-4c9a-be4c-224b6bf8231',
+        name: 'Test_Name',
+        value: 'KSSNdeVTAkgtVTP9GbAbyxaAHZ3bRoQjjplmrOHlcHod6bLmhFL3lYzfN4U92cqQd5DoVi6DiGv2DUu8QPltTt1VpqRNTtei5Dpp'
     };
     res.send(response);
 });

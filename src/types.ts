@@ -290,7 +290,17 @@ export type DatabaseListItem = {
   info?: DatabaseInfo;
   health?: DatabaseHealthStatus;
   utilization?: DatabaseUtilizationOverview;
+  apiKeys?: DatabaseApiKeys[];
 };
+export type DatabaseApiKeys = {
+  id:string;
+  name:string;
+}
+export type DatabaseApiKeyResponse = {
+  id:string;
+  name:string;
+  value:string;
+}
 export type Database = {
   id?: string;
   status?: DatabaseStatus;
